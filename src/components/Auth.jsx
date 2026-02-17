@@ -8,16 +8,20 @@ function Auth() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const regex = /^[a-zA-z0-9._+#%-]+@google\.com$/ 
+    // \. bcoz . is special character, $ is end of the string. regex enclosed in / /
+
     const navigate = useNavigate();
 
     const handleFormSubmission = (e) => {
         e.preventDefault()
 
-        if(isLogin) {
+        if(!regex.test(email)) {
+            alert("Invalid email domain!")
+        } else {
+            // console.log('Signup: ', {name, email, password})
             console.log('Dashboard')
             navigate('/dashboard')
-        } else {
-            console.log('Signup: ', {name, email, password})
         }
     }
 
