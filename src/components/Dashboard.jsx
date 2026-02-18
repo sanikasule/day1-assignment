@@ -7,6 +7,8 @@ import { products } from '../data/products';
 import ProductCard from './ProductCard';
 import SortAndFilter from './SortAndFilter/SortAndFilter';
 import useSorting from '../hooks/useSorting';
+import FilterCategory from './FilterByCategory/FilterCategory';
+import useFiltering from '../hooks/useFiltering';
 
 function Dashboard() {
   const [showPortfolio, setShowPortfolio] = useState(false);
@@ -55,7 +57,8 @@ function Dashboard() {
     )
   }
 
-  const { sortBy, setSortBy, sortedProducts } = useSorting(products);
+  const { selectedCategory, setSelectedCategory, stockStatus, setStockStatus, filteredProducts } = useFiltering(products);
+  const { sortBy, setSortBy, sortedProducts } = useSorting(filteredProducts);
 
   return (
     // <div>
@@ -75,6 +78,8 @@ function Dashboard() {
       
       <SortAndFilter sortBy={sortBy}
         setSortBy={setSortBy} />
+      <FilterCategory selectedCategory={selectedCategory} 
+        setSelectedCategory={setSelectedCategory} stockStatus={stockStatus} setStockStatus={setStockStatus}/>
       {/* Product Grid */}
       <div style={{
         display: 'grid',
